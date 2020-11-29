@@ -19,7 +19,7 @@ export  class UploadFileService {
     
     //this.https.DefaultRequestHeaders.ExpectContinue = false;
     const newRequest = new HttpRequest('POST', 'http://localhost:8080/savefile', this.data, {
-    reportProgress: true,
+    //reportProgress: true,
     responseType: 'text',
     });
     return this.https.request(newRequest);

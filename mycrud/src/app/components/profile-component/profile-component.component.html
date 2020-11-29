@@ -39,7 +39,7 @@
                         <div *ngFor = "let profile of chatRoom_data">
 
                             <div class="chat-div">
-                                <a class="profile_name" [routerLink]="['/chatroom_index']" [queryParams]="{name:profile.name,owner:profile.owner}">
+                                <a class="profile_name" [routerLink]="['/chatroom_index']" [queryParams]="{name:profile.name,sender:sender}">
                                     <span >{{profile.name}}</span>
                                 </a>
                                 <a class="join_top" (click)="onJointoChat(profile.name)" >

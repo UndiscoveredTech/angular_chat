@@ -17,11 +17,14 @@
   box-shadow: 0px 0px 10px 1px rgba(190, 188, 188, 0.562);
   text-align: center;
   padding: 50px 10px;
+
 }
 
 .before-chat{
   display: block;
   visibility: visible;
+  margin-bottom: 500px;
+
 }
 .before-chat h1 {
 

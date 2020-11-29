@@ -2,14 +2,16 @@
   <div class="info_display">
     <div class="info_div">
       <div class="back_btn">
-        <i class="fas fa-chevron-left"></i>
+        <a href="http://localhost:4200/profile?name={{chatRoom_data.owner}}">       
+           <i class="fas fa-chevron-left"></i>
+        </a>
       </div>
       <div class="group_name">
-           GROUP NAME
+        {{chatRoom_data.name}}
       </div>
     </div>
     <div class="owner_display">
-    Manage by: Admin
+    Managed by: {{chatRoom_data.owner}}
     </div>
     <hr>
 
@@ -25,28 +27,32 @@
     </div>
   </div>
 <div class="message-cont">
-<div class="text_box">
+<div class="text_box" #scrollMe [scrollTop]="scrollMe.scrollHeight">
   <div>{{chatroomname}}</div>
 
   
 
 
       <ul *ngFor="let message of messages" class="for_test">
-        <li>Message: {{message.content}}  Sender: {{message.sender}}</li>
+        <li>{{message.content}}  
+          <div class="sender">{{message.sender}}</div>
+        </li>
         <img class="{{message.image}}" width="140px" height="90px" src="../../../assets/{{message.image}}" alt="">
 
       </ul>
       <ul *ngFor="let message of mymessages" class="for_test">
-        <li  >Message: {{message.content}}  Sender: {{message.sender}}</li>
+        <li  >{{message.content}} 
+          <div class="sender">{{message.sender}}</div>
+        </li>
         <img src="../../../assets/{{message.image}}" alt="">
       </ul>
 
 </div>
    <div class="message-input">
-        <button (click) = "connect()" type="submit">Connect</button>
+        <!-- //<button (click) = "connect()" type="submit">Connect</button> -->
         <input (change)="selectFile($event)" name = "file" type="file" >
     
-        <input (change) = "messageHandler($event)" class="message-input" placeholder="{{placeholder}}">
+        <input (change) = "messageHandler($event)" value = {{singlemessage}} class="message-input" placeholder="Message...">
         <button (click) = "sendName()" type="submit">SEND</button>
     </div>     
       

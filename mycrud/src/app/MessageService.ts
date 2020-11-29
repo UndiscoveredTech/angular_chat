@@ -14,6 +14,18 @@ import { HttpClient } from '@angular/common/http';
   
 export  class MessageService {
 
+  //Object for storing messages
+
+
+  objectData: any[] = [
+    {
+      chatname:'',
+      messagelist: [
+
+      ],
+    },
+  ];
+  teststr: string[] = [];
   messages: string[] = [];
   showConversation: boolean = true;
   ws: any;
@@ -61,8 +73,50 @@ export  class MessageService {
       let that = this;
       this.ws.connect({}, function(frame) {
         that.ws.subscribe("/topic/javainuse", function(message){
-          console.log("------------MEE:**  " , JSON.parse(message.body));
-          that.messages.push(JSON.parse(message.body));
+          console.log("------------MEE:**  " , JSON.parse(message.body).destination);
+          let count = 0;
+          console.log("LENGTH: "+ that.teststr.length);
+          console.log("LENGTH: "+ that.objectData.length);
+          
+          for(let i = 0;i<that.objectData.length;i++){
+            if(that.objectData[i].chatname == JSON.parse(message.body).destination){
+              count++;
+              let data = {
+                sender : JSON.parse(message.body).sender,
+                destination : JSON.parse(message.body).destination,
+                content: JSON.parse(message.body).content,
+                image:JSON.parse(message.body).imagepath
+              }
+              that.objectData[i].messagelist.push(data);
+              break;
+            }
+            
+          }
+
+          if(count == 0){
+            let data = {
+              sender : JSON.parse(message.body).sender,
+              destination : JSON.parse(message.body).destination,
+              content: JSON.parse(message.body).content,
+              image:JSON.parse(message.body).imagepath
+            }
+            let chatname1 = JSON.parse(message.body).destination;
+            
+            let newdata = {
+              chatname: chatname1,
+              messagelist: [data]
+            }
+            that.objectData.push(JSON.parse(JSON.stringify(newdata)));
+            //that.objectData.messagelist.push(JSON.parse(JSON.stringify(newdata)));
+
+            //messagelist: data
+
+            
+          }
+          // var messageDATA = {
+            
+          // }
+          //that.messages.push(JSON.parse(message.body));
           
         });
   

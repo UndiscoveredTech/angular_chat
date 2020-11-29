@@ -1,5 +1,7 @@
 
-
+.wrapper{
+    /* display: none; */
+}
 .left-panel{
     display: inline;
     width: 250px;

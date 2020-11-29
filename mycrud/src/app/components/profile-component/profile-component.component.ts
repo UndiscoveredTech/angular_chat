@@ -120,24 +120,26 @@ export class ProfileComponent implements OnInit {
 
   }
   onAddChat() {
-    this.add_chatRoom_data.name = this.chatroomname;
-    this.add_chatRoom_data.owner = this.sender;
-    this.http.post<any>("http://localhost:8080/createChatRoom", this.add_chatRoom_data).subscribe({
-      next: data => {
-        if (data == true) {
-          this.chatroomname = '';
-          this.displayAddchatroom = false;
+    if (this.add_chatRoom_data.name != '') {
+      this.add_chatRoom_data.name = this.chatroomname;
+      this.add_chatRoom_data.owner = this.sender;
+      this.http.post<any>("http://localhost:8080/createChatRoom", this.add_chatRoom_data).subscribe({
+        next: data => {
+          if (data == true) {
+            this.chatroomname = '';
+            this.displayAddchatroom = false;
 
+          }
+        },
+        error: error => {
+          console.error('There was an error!', error);
         }
-      },
-      error: error => {
-        console.error('There was an error!', error);
-      }
-    })
+      })
 
-    this.resolveAfter2Seconds(20).then(value => {
-      this.getAllData();
-    })
+      this.resolveAfter2Seconds(20).then(value => {
+        this.getAllData();
+      })
+    }
   }
 
 
@@ -158,7 +160,7 @@ export class ProfileComponent implements OnInit {
         this.resolveAfter2Seconds(20).then(value => {
           this.editprofile_chatRoom_data = data;
           var count = 0;
-          console.log("--PC2: "+ this.sender_image);
+          console.log("--PC2: " + this.sender_image);
 
           for (let i = 0; i < this.editprofile_chatRoom_data.profiles.length; i++) {
 
@@ -169,7 +171,7 @@ export class ProfileComponent implements OnInit {
             }
           }
           if (count == 0) {
-            console.log("--PC2: "+ this.sender_image);
+            console.log("--PC2: " + this.sender_image);
 
             var pro = {
               name: this.sender,
@@ -198,21 +200,21 @@ export class ProfileComponent implements OnInit {
 
   //return profile icon
 
-  getprofileIcon(){
+  getprofileIcon() {
     this.http.get<any>(`http://localhost:8080/profile/byname/${this.sender}`).subscribe({
       next: data => {
-          console.log("REGISTER DATA: ===== ", data);
-          this.sender_image = data.profile_icon;
-          console.log("--PC: "+ this.sender_image);
-          
-         
-          
+        console.log("REGISTER DATA: ===== ", data);
+        this.sender_image = data.profile_icon;
+        console.log("--PC: " + this.sender_image);
+
+
+
       },
       error: error => {
-          console.error('There was an error!', error);
+        console.error('There was an error!', error);
       }
-      
-  })
+
+    })
   }
   // 
   ngOnInit(): void {
