@@ -1,0 +1,103 @@
+
+<div class="wrapper">
+
+    <div class="left-panel">
+
+        <div class="profile-info">
+            <div class="image-cont"></div>
+            <div class="info-cont">
+                <span>{{sender}}</span> 
+              
+
+                    <button (click) = "displaytoAdd()">CREATE CHAT ROOM</button>
+               
+            </div>
+
+        </div>
+        <div class="chat-rooms">
+
+            <p>Profiles</p>
+            <div class="profile-scroll">
+
+                    <div class="available_profiles">
+                    <div *ngFor = "let profile of profile_list">
+
+                        
+                            <span (click) = "clickname()">{{profile.name}}</span>
+                        
+                        
+                    </div>
+                    
+                </div>
+                
+            </div>
+
+            <p>ChatRooms</p>
+            <div class="profile-scroll">
+
+                    <div class="chat-new-div">
+                        <div *ngFor = "let profile of chatRoom_data">
+
+                            <div class="chat-div">
+                                <a class="profile_name" [routerLink]="['/chatroom_index']" [queryParams]="{name:profile.name,owner:profile.owner}">
+                                    <span >{{profile.name}}</span>
+                                </a>
+                                <a class="join_top" (click)="onJointoChat(profile.name)" >
+                                    <span  class="join">Add</span>
+                                </a>
+                            </div>
+                       
+
+                        <div>
+                        
+                            
+                            
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+
+<div class="message-panel">
+    
+    <!-- <div class="message-cont">
+        <ul *ngFor="let message of messages">
+          <li  >{{message}}</li>
+        </ul>
+        
+  </div> -->
+  <!-- <app-message varName="{{sender}}"></app-message> -->
+
+            <!-- <app-message varName="{{sender}}"></app-message> -->
+
+
+
+     <!-- <div class="message-cont"></div>
+     <div class="message-input">
+         <input class="message-input" />
+         <button (click)="sendName()" type="submit">SEND</button>
+     </div> -->
+
+ </div>
+    
+
+
+    <div class="{{displayAddchatroom ? 'add-chatroom' : 'hidden'}}" >
+        <h1>Add chatroom</h1>
+
+        <div>
+            <input class="input_new" type="text" (change)="chatroomNameHandeler($event)" value="{{chatroomname}}" placeholder="Chat name">
+            <div class="button_new">
+                <button (click) = "onAddChat()" type="submit" value="Add">Add</button>
+                <button (click) = "onCancle()" type="submit" value="Cancel">Cancel</button>
+
+            </div>
+        </div>
+        
+    </div>
+
+</div>
+
+

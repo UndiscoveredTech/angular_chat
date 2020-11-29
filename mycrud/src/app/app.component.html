@@ -1,0 +1,99 @@
+<div  class="container">
+  <div class="wrapper">
+
+    <router-outlet>
+  
+    
+          <div class="{{before_chat_visible ? 'before-chat' : 'hidden'}}">
+                      
+            <h1>Enter Chat</h1>
+            <p>Move Engineering</p>
+          
+            <form class="my-form">
+              <p>Log In</p>
+              
+              <label for="name">Enter your name </label>
+              <input (change)="onNameHandler($event)" id="name" value="{{name}}" name="name" class="form-control" type="text" placeholder="Enter name">
+              <div class="but-connect">
+                <button  id="connect" class="btn btn-default" type="button" [disabled]="disabled" (click)="connect()"><a [routerLink]="['/profile']" [queryParams]="{name:connect_data.name}" >Connect to chat</a></button>
+              </div>
+
+              
+              <p>Register Now</p>
+
+              <label for="name">Enter your name </label>
+              <input (change)="onRegisterHandler($event)" id="name_register" value="{{name}}"  class="form-control" type="text" placeholder="Enter name">
+
+              <div class="free_pic">
+                <span class="solder">
+                  <span>
+                    <img id="PngItem_1" (click)="getimage($event)" style="display: inline;" src="../assets/profile_icons/PngItem_1.png" width="45px" height="45px" alt="">
+                    <div>John</div>
+                  </span>
+                </span>
+                <span class="solder">
+                  <span>
+                    <img id="PngItem_2" (click)="getimage($event)" src="../assets/profile_icons/PngItem_2.png" width="45px" height="45px" alt="">
+                    <div>Crissy</div>
+                  </span>
+                </span>
+                <span class="solder">
+                  <span>
+                    <img id="PngItem_3" (click)="getimage($event)" src="../assets/profile_icons/PngItem_3.png" width="45px" height="45px" alt="">
+                    <div>Syphax</div>
+                  </span>
+                </span>
+                <span class="solder">
+                  <span>
+                    <img id="PngItem_4" (click)="getimage($event)" src="../assets/profile_icons/PngItem_4.png" width="45px" height="45px" alt="">
+                    <div>Tina</div>
+                  </span>
+                </span>
+
+              </div>
+
+              <div class="but-connect">
+                <button  id="connect_register" class="btn btn-default" type="button" [disabled]="disabled" (click)="register()"><a [routerLink]="['/profile']" [queryParams]="{name:register_data.name}" >Register to Chat</a></button>
+              </div>
+            </form>
+      </div>
+
+    </router-outlet>
+
+        <!-- <div class="{{before_chat_visible ? 'hidden' : 'after-chat'}}">
+
+          <ul >
+
+            <li>{{name}}</li>
+          </ul>
+          <h3>Move Engineering</h3>
+          <div class="col-md-12" *ngIf="showConversation">
+
+
+            <ul *ngFor="let message of messages">
+              <li  >{{message}}</li>
+            </ul>
+            
+
+            <form action="">
+
+              <div class="message-and-send">
+                <div class="message">
+                  <input id="name1" name="message_send" class="form-control" [(ngModel)]="message_send" type="text" placeholder="Type message">
+                </div>
+                <div class="send">
+                  <input (click)="sendName()" type="submit" value="SEND">
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+        </div> -->
+
+  </div>
+
+</div>
+
+
+

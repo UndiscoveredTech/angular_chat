@@ -1,0 +1,103 @@
+.container{
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.wrapper{
+  position: relative;
+  left: 50%;
+  top:50%;
+  transform: translate(-50%,-50%);
+  width: 700px;
+  height: 580px;
+  background-color: #f0f0f0ab;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 1px rgba(190, 188, 188, 0.562);
+  text-align: center;
+  padding: 50px 10px;
+}
+
+.before-chat{
+  display: block;
+  visibility: visible;
+}
+.before-chat h1 {
+
+  font-size: 30px;
+    color:#073655;
+
+}
+h1,h2{
+  display: inline;
+}
+
+.my-form p{
+
+margin-top: 50px;
+font-size: 30px;
+}
+
+.my-form input
+{
+  padding: 6px;
+  font-size: 15px;
+  border-radius: 5px;
+  border: 0.3px solid rgba(207, 207, 207, 0.719);
+}
+.but-connect{
+  margin-top: 4%;
+
+}
+.but-connect button{
+  padding: 1% 4%;
+  background-color: white;
+  border:0.5px solid rgba(177, 173, 173, 0.603);
+  border-radius: 5px;
+  font-size: 18px;
+  border: none;
+
+
+}
+.but-connect button:hover{
+    
+  background-color: #e4e4e4;
+  color:white;
+  border: 0px;
+
+
+ }
+
+.free_pic {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+.free_pic .solder {
+  margin: 10px;
+  
+}
+
+.text_image span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+
+}
+
+.after-chat{
+  display: block;
+  visibility: visible;
+}
+.after-chat li{
+  background-color: yellow;
+  padding: 3%;
+}
+.hidden{
+  display: none;
+  visibility: hidden;
+}
+
+

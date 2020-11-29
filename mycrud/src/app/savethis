@@ -1,0 +1,201 @@
+import { Component,OnInit } from '@angular/core';
+import * as Stomp from 'stompjs';
+import * as SockJS from 'sockjs-client';
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent implements OnInit{
+  title = 'mycrud';
+
+  messages: string[] = [];
+  showConversation: boolean = true;
+  ws: any;
+  name: string;
+  disabled: boolean;
+
+  message_send: string;
+  status: string[] = [];
+  before_chat_visible: boolean =  true;
+  constructor(){}
+  ngOnInit(): void {
+    //throw new Error('Method not implemented.');
+  }
+
+  connect() {
+    this.before_chat_visible = false;
+    let socket = new SockJS("http://localhost:8080/websocketApp");
+    this.ws = Stomp.over(socket);
+    let that = this;
+    this.ws.connect({}, function(frame) {
+      that.ws.subscribe("/topic/javainuse", function(message){
+          var mydata = {
+            sender: that.name,
+            type:'newUser'
+          }
+  
+          var data = JSON.stringify({
+            mydata
+          })
+  
+        var chat_status = "";
+        if(mydata.type == 'newUser'){
+          chat_status = mydata.sender + " Joined: " + message.body;
+        }
+        that.status.push(chat_status);
+
+          that.ws.send("/app/chat.newUser", {}, data)
+          that.messages.push(message.body);
+        
+      });
+
+        
+
+      that.disabled = true;
+    }, function(error) {
+      alert("STOMP error " + error);
+    });
+  }
+
+  disconnect() {
+    if (this.ws != null) {
+      this.ws.ws.close();
+    }
+    this.setConnected(false);
+      console.log("Disconnected");
+  }
+
+  sendName() {
+
+    var mdata = {
+      sender : this.name,
+      type : 'writing',
+      content:"asdfasdf"
+    }
+    let data = JSON.stringify({
+      sender : this.name,
+      type : 'writing',
+      content: 'my content'
+    })
+    this.ws.send("/app/chat.sendMessage", {}, data);
+  }
+
+  showUserConnected(message) {
+    this.showConversation = true;
+    this.messages.push(message)
+  }
+
+  setConnected(connected) {
+    this.disabled = connected;
+    this.showConversation = connected;
+    this.messages = [];
+  }
+
+
+
+
+  public static onMessageReceived(payload) {
+    var message = JSON.parse(payload.body); 
+    
+    
+    //var messageElement = document.createElement('li');
+  console.log("message adem---- : ",message);
+  
+    if (message.type === 'newUser') {
+      console.log("new user from adem ");
+
+      // messageElement.classList.add('event-data');
+      message.content = message.sender + 'has joined the chat';
+      
+      //console.log("----: "+ message.content);
+      
+    } else if (message.type === 'Leave') {
+      console.log("left user from adem ");
+
+      //messageElement.classList.add('event-data');
+      message.content = message.sender + 'has left the chat';
+    } else {
+      console.log("hereeee:");
+    
+    }
+
+    status = message.content;
+
+  
+  }
+}
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////
+
+<div  class="container">
+  <div class="wrapper">
+
+        <div class="{{before_chat_visible ? 'before-chat' : 'hidden'}}">
+                
+                <h1>Enter Chat</h1>
+                <h3>Move Engineering</h3>
+              
+                <form class="my-form">
+                  <label for="name">Enter your name</label>
+                  <input [(ngModel)]="name" id="name" name="name" class="form-control" type="text" placeholder="Enter name">
+                  <div class="but-connect">
+                    <button  id="connect" class="btn btn-default" type="button" [disabled]="disabled" (click)="connect()">Connect to chat</button>
+                  </div>
+                </form>
+                <!-- <label for="connect">WebSocket connection:</label> -->
+                <!-- <button id="connect" class="btn btn-default" type="button" [disabled]="disabled" (click)="connect()">Connect</button> -->
+                <!-- <button id="disconnect" class="btn btn-default" type="button" [disabled]="!disabled" (click)="disconnect()">Disconnect
+                </button> -->
+        
+          
+                <!-- <label for="name">What is your name?</label>
+                <input type="text" id="name" name="name" class="form-control" placeholder="Your name here..." [(ngModel)]="name">
+              <button id="send" class="btn btn-default" type="button" (click)="sendName()">Send</button> -->
+
+        </div>
+
+        <div class="{{before_chat_visible ? 'hidden' : 'after-chat'}}">
+
+          <ul >
+
+            <li>{{name}}</li>
+          </ul>
+          <h3>Move Engineering</h3>
+          <div class="col-md-12" *ngIf="showConversation">
+
+
+            <ul *ngFor="let message of messages">
+              <li  >{{message}}</li>
+            </ul>
+            
+
+            <form action="">
+
+              <div class="message-and-send">
+                <div class="message">
+                  <input id="name1" name="message_send" class="form-control" [(ngModel)]="message_send" type="text" placeholder="Type message">
+                </div>
+                <div class="send">
+                  <input (click)="sendName()" type="submit" value="SEND">
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+        </div>
+
+  </div>
+
+</div>
+

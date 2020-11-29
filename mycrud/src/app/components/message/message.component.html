@@ -1,0 +1,55 @@
+<div class="top_div">
+  <div class="info_display">
+    <div class="info_div">
+      <div class="back_btn">
+        <i class="fas fa-chevron-left"></i>
+      </div>
+      <div class="group_name">
+           GROUP NAME
+      </div>
+    </div>
+    <div class="owner_display">
+    Manage by: Admin
+    </div>
+    <hr>
+
+    <div *ngFor="let profile of chatRoom_data.profiles">
+      <div class="online_members">
+        <div class="profil_pic">
+            <img width="50px" height="50px" src="../../../assets/profile_icons/{{profile.profile_icon}}.png" alt="">
+        </div>
+        <div class="profil_desc">
+          <p>{{profile.name}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="message-cont">
+<div class="text_box">
+  <div>{{chatroomname}}</div>
+
+  
+
+
+      <ul *ngFor="let message of messages" class="for_test">
+        <li>Message: {{message.content}}  Sender: {{message.sender}}</li>
+        <img class="{{message.image}}" width="140px" height="90px" src="../../../assets/{{message.image}}" alt="">
+
+      </ul>
+      <ul *ngFor="let message of mymessages" class="for_test">
+        <li  >Message: {{message.content}}  Sender: {{message.sender}}</li>
+        <img src="../../../assets/{{message.image}}" alt="">
+      </ul>
+
+</div>
+   <div class="message-input">
+        <button (click) = "connect()" type="submit">Connect</button>
+        <input (change)="selectFile($event)" name = "file" type="file" >
+    
+        <input (change) = "messageHandler($event)" class="message-input" placeholder="{{placeholder}}">
+        <button (click) = "sendName()" type="submit">SEND</button>
+    </div>     
+      
+</div>
+
+</div>

@@ -1,0 +1,84 @@
+.form-contaiener{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-top: 6%;
+    width: 48%;
+    height: 30em;
+    left: 50%;
+    transform: translate(-50%,-0%);
+    background-color: rgba(179, 210, 218,0.7);
+    box-shadow: 3px 3px 5px 6px rgb(216, 213, 213);
+    border-radius: 5px;
+
+}
+.header{
+    position: relative;
+    display: block;
+    height: 20%;
+    text-align: center;
+}
+.header h1{
+    text-transform: uppercase;
+
+}
+.form-wrapper{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    height: 80%;
+}
+.form-wrapper form{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+    margin-top: 5%;
+}
+.form-wrapper form .input-material{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+    margin-top: 3%;
+
+}
+
+.form-wrapper form .input-material input{
+    margin-top: 2%;
+    margin-bottom: 4%;
+    padding: 4% 5%;
+    border-radius: 10px;
+    border:none;
+    background-color: rgba(23, 23, 24,0.9);
+    color: silver;
+
+}
+.form-wrapper form .but{
+    margin-top: 6%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 20%;
+    margin-top: 3%;
+}
+.form-wrapper form .but button{
+background-color: rgb(40, 43, 32);
+border: none;
+border-radius: 15px;
+padding: 8%;
+font-size: 15px;
+font-weight: 600;
+color: rgb(73, 74, 156);
+letter-spacing: 0.1em;
+
+
+}
+.form-wrapper form .but button:focus{
+        outline: none;
+    }
+
+input[type="text"], input[type="number"],input[type="submit"], textarea, select { 
+    outline: none;
+}
